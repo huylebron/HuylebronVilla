@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HuylebronVilla.Application\HuylebronVilla.Application.csproj" />
+    <ProjectReference Include="..\HuylebronVilla.Domain\HuylebronVilla.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
