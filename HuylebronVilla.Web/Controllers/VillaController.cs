@@ -1,4 +1,5 @@
-﻿using HuylebronVilla.Infrastructure.Data;
+﻿using HuylebronVilla.Domain.Entities;
+using HuylebronVilla.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HuylebronVilla.Web.Controllers
@@ -16,6 +17,29 @@ namespace HuylebronVilla.Web.Controllers
         {
             var villas = _db.Villas.ToList();
             return View(villas);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Villa obj)
+        {
+            if (obj.Name == obj.Description)
+            {
+                ModelState.AddModelError("", "tiêu đề không được giống với tên ");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Villas.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Villa");
+            }
+
+            return View();
         }
     }
 }
